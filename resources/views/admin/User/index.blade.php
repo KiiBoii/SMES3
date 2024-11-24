@@ -1,6 +1,7 @@
 @extends('admin.layouts.admin.app')
-@section('content')
 
+@section('content')
+{{--start main content--}}
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -12,15 +13,14 @@
                                     </path>
                                 </svg></a></li>
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"> <a href="{{ route('pelanggan.list') }}">Pelanggan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Mitra</li>
+                        <li class="breadcrumb-item active" aria-currentUser</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Data Mitra</h2>
-                <p class="mb-0">List Suruh Mitra.</p>
+                <h2 class="h4">Data User</h2>
+                <p class="mb-0">List Suruh User Setia.</p>
             </div>
 
-            <div class="btn-toolbar mb-2 mb-md-0"><a href="{{ route('mitra.create') }}"
+            <div class="btn-toolbar mb-2 mb-md-0"><a href="{{ route('User.create') }}"
                     class="btn btn-sm btn-success text-white d-inline-flex align-items-center"><svg
                         class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -44,38 +44,26 @@
                     <table class="table table-centered table-nowrap mb-0 rounded">
                         <thead class="thead-light">
                             <th class="border-0 rounded-start">#</th>
-                            <th class="border-0">NAMA MITRA</th>
-                            <th class="border-0">ALAMAT</th>
+                            <th class="border-0">NAMA</th>
                             <th class="border-0">EMAIL</th>
-                            <th class="border-0">NOMOR TELPON</th>
-                            <th class="border-0">JENIS KEMITRAAN</th>
-                            <th class="border-0">TANGGAL BERGABUNG</th>
+                            <th class="border-0">PASSWORD</th>
+                            <th class="border-0">ROLE</th>
                             <th class="border-0 rounded-end">ACTION</th>
                         </thead>
                         <tbody>
                             @php
                                 $no = 0;
                             @endphp
-                            @foreach ($dataMitra as $mitra)
+                            @foreach ($dataUser as $row)
                                 <tr>
                                     <td>{{ ++$no }}</td>
-                                    <td>{{ $mitra->nama_mitra }}</td>
-                                    <td>{{ $mitra->alamat }}</td>
-                                    <td>{{ $mitra->email }}</td>
-                                    <td>{{ $mitra->nomor_telepon }}</td>
+                                    <td>{{ $row->name}}</td>
+                                    <td>{{ $row->email }}</td>
+                                    <td>{{ $row->password}}</td>
+                                    <td>{{ $row->role }}</td>
+
                                     <td>
-                                        @if ($mitra->jenis_kemitraan === 'Platinum')
-                                            <span class="badge bg-info">{{ $mitra->jenis_kemitraan }}</span>
-                                        @elseif ($mitra->jenis_kemitraan === 'Gold')
-                                            <span
-                                                class="badge bg-warning text-dark">{{ $mitra->jenis_kemitraan }}</span>
-                                        @elseif ($mitra->jenis_kemitraan === 'Silver')
-                                            <span class="badge bg-secondary">{{ $mitra->jenis_kemitraan }}</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ \Carbon\Carbon::parse($mitra->tanggal_bergabung)->format('d-M-Y') }}</td>
-                                    <td>
-                                        <a href="{{ route('mitra.edit', $mitra->mitra_id) }}"
+                                        <a href="{{ route('User.edit', $row->id) }}"
                                             class="btn btn-info btn-sm">
                                             <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
                                                 stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -86,7 +74,7 @@
                                             </svg>
                                             Edit
                                         </a>
-                                        <a href="{{ route('mitra.destroy', $mitra->mitra_id) }}"
+                                        <a href="{{ route('User.destroy', $row->id) }}"
                                             class="btn btn-danger btn-sm">
                                             <svg class="icon icon-xs me-2" data-slot="icon" fill="none"
                                                 stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -125,5 +113,5 @@
             </div>
         </div>
 
-
-        @endsection
+        {{--end main content--}}
+@endsection

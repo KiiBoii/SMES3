@@ -56,7 +56,7 @@
 
                     <main class="mt-6">
                         <center>
-                            <h1 style="font-size: 36px">Aldi 2 SiB</h1>
+                            <h1 style="font-size: 36px">Rizki 2 SiB</h1>
 
                         </center>
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">

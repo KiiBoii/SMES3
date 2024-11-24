@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #f05340, #f8cdda);
+            background-color: #f8f9fa;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,6 +24,7 @@
 
         .card-header {
             background-color: #f05340;
+            /* Laravel Red */
             color: white;
             border-top-left-radius: 12px;
             border-top-right-radius: 12px;
@@ -38,17 +38,18 @@
         .form-control {
             border-radius: 8px;
             border: 1px solid #ced4da;
-            padding-right: 30px;
-            /* Add space for the icon */
         }
 
         .btn-primary {
             border-radius: 8px;
             background-color: #f05340;
+            /* Laravel Red */
+            border: none;
         }
 
         .btn-primary:hover {
             background-color: #d94734;
+            /* Darker Laravel Red */
         }
 
         .card-footer {
@@ -63,19 +64,13 @@
 
         a {
             color: #f05340;
+            /* Laravel Red */
             text-decoration: none;
         }
 
         a:hover {
             color: #d94734;
-        }
-
-        .eye-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
+            /* Darker Laravel Red */
         }
     </style>
 </head>
@@ -92,14 +87,9 @@
 
                         @if (session('result') == 'error')
                             <div class="alert alert-danger">
-                                Login failed, email atau password incorrect
+                                Login gagal, periksa kembali email dan password anda
                             </div>
                         @endif
-                        @if (session('error') == 'error')
-                        <div class="alert alert-danger">
-                            Silahkan login terlebih dahulu
-                        </div>
-                    @endif
 
                     </div>
                     <div class="card-body">
@@ -117,9 +107,11 @@
                             @if ($result == 'success')
                                 <div class="alert alert-success text-center">login</div>
                             @elseif($result == 'error')
-                                <div class="alert alert-danger text-center">failed</div>
+                                <div class="alert alert-danger text-center">gagal</div>
                             @endif
                         @endif
+
+
 
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
@@ -132,11 +124,8 @@
                             </div>
                             <div class="mb-4">
                                 <label for="password" class="form-label">Password</label>
-                                <div class="position-relative">
-                                    <input type="password" class="form-control" id="password" name="password" required
-                                        placeholder="Enter your password">
-                                    <i class="fas fa-eye eye-icon" id="togglePassword"></i>
-                                </div>
+                                <input type="password" class="form-control" id="password" name="password" required
+                                    placeholder="Enter your password">
                             </div>
 
                             <div class="d-grid">
@@ -145,7 +134,7 @@
                         </form>
                     </div>
                     <div class="card-footer">
-                        <p class="small-text">Don't have an account? <a href="#">Forgot Password</a></p>
+                        <p class="small-text">Don't have an account? <a href="show">Forgot Password</a></p>
                     </div>
                 </div>
             </div>
@@ -153,22 +142,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Toggle password visibility
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const eyeIcon = togglePassword;
-
-        togglePassword.addEventListener('click', function() {
-            // Toggle the password type attribute
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-
-            // Toggle the eye icon
-            eyeIcon.classList.toggle('fa-eye');
-            eyeIcon.classList.toggle('fa-eye-slash');
-        });
-    </script>
 </body>
 
 </html>

@@ -82,7 +82,7 @@ return redirect()->route('pelanggan.list')->with('success','Penambahan Data Berh
             'first_name' => ['required'],
             'last_name'  => ['required'],
             'birthday'   => ['required', 'date'],
-            'gender'     => ['required', 'in:Male,Female,Asoy Indomaret,  Lontong Bedeng'],
+            'gender'     => ['required', 'in:Male,Female,Other'],
             'email'      => ['required', 'email'],
             'phone'      => ['required', 'numeric'],
              ]);

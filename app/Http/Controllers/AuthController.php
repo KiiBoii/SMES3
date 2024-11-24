@@ -2,74 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        // Validasi input
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'regex:/^[a-zA-Z\s]+$/'],
-            'address' => ['required', 'max:300'],
-            'dob' => ['required', 'date'],
-            'username' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'min:8', 'regex:/[A-Z]/', 'regex:/[0-9]/'],
-            'password_confirmation' => ['required', 'same:password'],
-        ]);
-
-        // Jika validasi gagal
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        // Jika password dan confirm password tidak sama
-        if ($request->password !== $request->password_confirmation) {
-            return redirect()->back()->with('error', 'Confirm Password tidak sesuai')->withInput();
-        }
-
-        // Proses registrasi berhasil
-        return redirect()->route('auth.login')->with('success', 'Registrasi berhasil! Silahkan Login');
-    }
-
+    /**
+     * Halaman login.
+     *
+     * Jika user sudah login, maka akan dialihkan ke halaman dashboard.
+     * Jika belum, maka akan ditampilkan form login.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
+
         return view('login-form');
+
+
     }
 
     public function login(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'password' => ['min:3', 'regex:/[A-Z]/'],
+            'email' => 'required',
+            'password' => [
+                'required', // Wajib diisi
+
+            ],
+        ], [
+            'password.min' => 'Password minimal 3 karakter',
+            'password.regex' => 'Password harus mengandung setidaknya 1 huruf kapital',
         ]);
 
-        $username = $request->username;
-        $password = $request->password;
-
-        $nim = 'Nim2357301007';
-
-        if ($username == $nim && $password == $nim) {
-            session([
-                'username' => $request->username,
-                'last_login' => date('Y-m-d H:i:s'),
-            ]);
-            return redirect('/homepage')->with('status', 'success');
+        $user = User::where('email', $request->email)->first();
+        if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            return redirect()->route('dashboard');
         } else {
-            session()->flush();
-            return redirect('/auth')->with('status', 'error');
+            Session::flush();
+
+            $result = 'error';
         }
+
+        return redirect()->route('login-form')->with('result', $result);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         // Hapus semua sesi
-        session()->flush();
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        // Arahkan kembali ke halaman login dengan pesan sukses
-        return redirect('/auth')->with('status', 'success')->with('message', 'Logout berhasil, silahkan login kembali');
+        return redirect()->route('login-form');
+    }
+    public function show_forgot_password(Request $request)
+    {
+
+        return view('lupa-password', $request);
+    }
+    public function do_forgot_password(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        // if ($request 'email' == '2357301004@gmail.com') {
+        //     return redirect()->route('login')->with('success', 'link lupa password sudah di kirimkan ke email');
+        // }else {
+        //     return redirect()->route('login')->with('error', 'email yang di msukkan tidak valid');
+
+        // }
+
     }
 
 }
