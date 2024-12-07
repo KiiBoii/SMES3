@@ -7,11 +7,12 @@
         </a>
         <div class="d-flex align-items-center">
             <button class="navbar-toggler d-lg-none collapsed" type="button"
-                data-bs-toggle="coll                               <div class="media d-flex align-items-center">
+                data-bs-toggle="coll
+                <div class="media d-flex align-items-center">
                 <img class="avatar rounded-circle" alt="Image placeholder"
-                    src="{{ asset('assets-admin/img/team/profile-picture-3.jpg') }}">
+                    src="{{ asset('assets/images/WhatsApp Image 2024-12-04 at 7.45.46 PM.jpeg') }}">
                 <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span class="mb-0 font-small fw-bold text-gray-900">{{Auth::check()? Auth::user()->name : ''}}</span>
+                    <span class="mb-0 font-small fw-bold text-gray-900">{{ Auth::check() ? Auth::user()->name : '' }}</span>
                 </div>
         </div>
         </a>
@@ -287,12 +288,12 @@
                                             <!-- Avatar -->
                                             <a href="#" class="avatar">
                                                 <img class="rounded" alt="Image placeholder"
-                                                    src="{{ asset('assets-admin/img/team/profile-picture-4.jpg') }}">
+                                                    src="{{ asset('assets/images/WhatsApp Image 2024-08-03 at 9.19.28 AM.jpeg') }}">
                                             </a>
                                         </div>
                                         <div class="col-auto ms--2">
                                             <h4 class="h6 mb-0">
-                                                <a href="#">Chris Wood</a>
+                                                <a href="#">FANUM</a>
                                             </h4>
                                             <div class="d-flex align-items-center">
                                                 <div class="bg-success dot rounded-circle me-1"></div>
@@ -319,16 +320,16 @@
                                             <!-- Avatar -->
                                             <a href="#" class="avatar">
                                                 <img class="rounded" alt="Image placeholder"
-                                                    src="{{ asset('assets-admin/img/team/profile-picture-2.jpg') }}">
+                                                    src="{{ asset('assets/images/images.jpg') }}">
                                             </a>
                                         </div>
                                         <div class="col-auto ms--2">
                                             <h4 class="h6 mb-0">
-                                                <a href="#">Jose Leos</a>
+                                                <a href="#">DITO</a>
                                             </h4>
                                             <div class="d-flex align-items-center">
-                                                <div class="bg-warning dot rounded-circle me-1"></div>
-                                                <small>In a meeting</small>
+                                                <div class="bg-danger dot rounded-circle me-1"></div>
+                                                <small>OFFLINE</small>
                                             </div>
                                         </div>
                                         <div class="col text-end">
@@ -528,10 +529,10 @@
                         data-background="{{ asset('assets-admin/img/profile-cover.jpg') }}"
                         style="background: url(&quot;&quot;);"></div>
                     <div class="card-body pb-5">
-                        <img src="{{ asset('assets-admin/img/team/profile-picture-1.jpg') }}"
+                        <img src="{{ asset('assets/images/WhatsApp Image 2024-12-04 at 7.45.46 PM.jpeg') }}"
                             class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
-                        <h4 class="h3">Neil Sims</h4>
-                        <h5 class="fw-normal">Senior Software Engineer</h5>
+                        <h4 class="h3">ADMIN 1</h4>
+                        <h5 class="fw-normal">ADMIN PERTAMA</h5>
                         <p class="text-gray mb-4">New York, USA</p>
                         <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center me-2" href="#">
                             <svg class="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20"

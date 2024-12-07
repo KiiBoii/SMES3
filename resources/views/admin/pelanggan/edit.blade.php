@@ -81,11 +81,8 @@
                                 <option value="Male" {{ $dataPelanggan->gender == 'Male' ? 'selected' : '' }}>Male
                                 </option>
                                 <option
-                                    value="Asoy Indomaret"{{ $dataPelanggan->gender == 'Asoy Indomaret' ? 'selected' : '' }}>
+                                    value="Other"{{ $dataPelanggan->gender == 'Other' ? 'selected' : '' }}>
                                     Asoy Indomart</option>
-                                <option value="Lontong Bedeng"
-                                    {{ $dataPelanggan->gender == 'Lontong Bedeng' ? 'selected' : '' }}>Lontong Bedeng
-                                </option>
                             </select></div>
                     </div>
                     <div class="row">

@@ -12,9 +12,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        $pageData['dataUser'] = User::all();
+        $filterableColumns =['role'];
+        $searchableColumns=['name'];
+        $pageData['dataUser'] = User::filter( $request,$filterableColumns,$searchableColumns )
+        ->paginate(10)
+        ->onEachSide(2)
+        ->withQueryString();
         return view('admin.User.index', $pageData);
     }
 

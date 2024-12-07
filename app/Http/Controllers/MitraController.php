@@ -10,10 +10,15 @@ class MitraController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request )
     {
         // Fetch all mitra data
-        $pageData['dataMitra'] = Mitra::all();
+        $filterableColumns =['jenis_kemitraan', 'tanggal_bergabung'];
+        $searchableColumns=['nama_mitra'];
+        $pageData['dataMitra'] = Mitra::filter( $request,$filterableColumns,$searchableColumns )
+        ->paginate(10)
+        ->onEachSide(2)
+        ->withQueryString();
         return view('admin.mitra.index', $pageData);
     }
 

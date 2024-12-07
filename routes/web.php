@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MitraController;
-use App\Http\Controllers\PelangganController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\testcontroller;
-use App\Http\Controllers\Testresource;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Testresource;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\testcontroller;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MitraController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\DetailProdukController;
 
 date_default_timezone_set('Asia/Jakarta');
 
@@ -70,14 +72,14 @@ Route::get('/login', [AuthController::class, 'index'])->name('login-form');
 Route::post('/login/data', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['checkislogin']], function () {
-    Route::group(['middleware' => ['checkislogin', 'checkrole:Pelanggan']], function () {
+
         Route::get('/homepage', function () {
             return view('homepage'); // Buat view untuk homepage
         })->name('homepage');
 
-    });
 
-    Route::group(['middleware' => ['checkislogin', 'checkrole:Mitra']], function () {
+
+
         Route::get('mitra', [MitraController::class, 'index'])->name('mitra.index');
         Route::get('mitra/create', [MitraController::class, 'create'])->name('mitra.create');
         Route::post('mitra/store', [MitraController::class, 'store'])->name('mitra.store');
@@ -90,8 +92,7 @@ Route::group(['middleware' => ['checkislogin']], function () {
 
         // Use the correct parameter name in the destroy route
         Route::get('mitra/destroy/{param1}', [MitraController::class, 'destroy'])->name('mitra.destroy');
-    });
-    Route::group(['middleware' => ['checkislogin', 'checkrole:Admin']], function () {
+
         Route::get('user', [UserController::class, 'index'])->name('User.list');
         Route::get('user/create', [UserController::class, 'create'])->name('User.create');
         Route::post('user/store', [UserController::class, 'store'])->name('User.store');
@@ -102,7 +103,6 @@ Route::group(['middleware' => ['checkislogin']], function () {
 
         Route::get('user/destroy/{param1}', [UserController::class, 'destroy'])->name('User.destroy');
 
-    });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -132,3 +132,9 @@ Route::group(['middleware' => ['checkislogin']], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
+Route::post('/cart/remove', [CartController::class, 'destroy'])->name('cart.destroy');
+
+
+Route::get('/detailproduk', [DetailProdukController::class, 'index'])->name('detailproduk.index');

@@ -10,9 +10,14 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
-        $pageData['dataProduk'] = produk:: all();
+        $filterableColumns =['jenis', 'tgl_expired'];
+        $searchableColumns=['nama_produk'];
+        $pageData['dataProduk'] = produk:: filter( $request,$filterableColumns,$searchableColumns )
+        -> paginate(10)
+        ->onEachSide(2)
+        ->withQueryString();
         return view('admin.produk.index', $pageData);
     }
 
@@ -35,23 +40,22 @@ class ProdukController extends Controller
             'harga'   => ['required', 'numeric'],
             'stok'   => ['required', 'numeric'],
             'jenis'     => ['required', 'in:Makanan,Minuman,Kerajinan'],
-            'tgl_expired'      => ['required', 'date'],
+            'tgl_expired' => ['required', 'date'],
+            'gambar' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Validasi untuk gambar
         ]);
-        $data['nama_produk'] = $request->nama_produk;
-$data['deskripsi'] = $request->deskripsi;
-$data['harga'] = $request->harga;
-$data['stok'] = $request->stok;
-$data['jenis'] = $request->jenis;
-$data['tgl_expired'] = $request->tgl_expired;
 
-produk::create($data);
+        $data = $request->only(['nama_produk', 'deskripsi', 'harga', 'stok', 'jenis', 'tgl_expired']);
 
-return redirect()->route('produk.list')->with('success','Penambahan Produk Berhasil!');
+        // Simpan file gambar
+        if ($request->hasFile('gambar')) {
+            $data['gambar'] = $request->file('gambar')->store('produk', 'public');
+        }
 
-        //dd($request->all());
+        produk::create($data);
 
-
+        return redirect()->route('produk.list')->with('success', 'Penambahan Produk Berhasil!');
     }
+
 
     /**
      * Display the specified resource.
@@ -83,24 +87,35 @@ return redirect()->route('produk.list')->with('success','Penambahan Produk Berha
             'harga'   => ['required', 'numeric'],
             'stok'   => ['required', 'numeric'],
             'jenis'     => ['required', 'in:Makanan,Minuman,Kerajinan'],
-            'tgl_expired'      => ['required', 'date'],
-             ]);
-             $produk_id=  $request->produk_id;
-             $produk = produk::findOrFail ($produk_id);
+            'tgl_expired' => ['required', 'date'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Validasi untuk gambar opsional
+        ]);
 
-              $produk->nama_produk=$request->nama_produk;
-              $produk->deskripsi=$request->deskripsi;
-              $produk->harga=$request->harga;
-              $produk->stok=$request->stok;
-              $produk->jenis=$request->jenis;
-              $produk->tgl_expired=$request->tgl_expired;
-              $produk->save();
+        $produk_id = $request->produk_id;
+        $produk = produk::findOrFail($produk_id);
 
-              return redirect()->route('produk.list')->with('success','Data Produk Berhasil Diubah');
+        $produk->nama_produk = $request->nama_produk;
+        $produk->deskripsi = $request->deskripsi;
+        $produk->harga = $request->harga;
+        $produk->stok = $request->stok;
+        $produk->jenis = $request->jenis;
+        $produk->tgl_expired = $request->tgl_expired;
 
+        // Perbarui file gambar jika ada unggahan baru
+        if ($request->hasFile('gambar')) {
+            // Hapus file lama jika ada
+            if ($produk->gambar) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
 
+            // Simpan file gambar baru
+            $produk->gambar = $request->file('gambar')->store('produk', 'public');
+        }
+
+        $produk->save();
+
+        return redirect()->route('produk.list')->with('success', 'Data Produk Berhasil Diubah');
     }
-
     /**
      * Remove the specified resource from storage.
      */

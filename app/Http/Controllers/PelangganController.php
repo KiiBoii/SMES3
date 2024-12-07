@@ -10,9 +10,14 @@ class PelangganController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request )
     {
-        $pageData['dataPelanggan'] = Pelanggan:: all();
+        $filterableColumns =['gender', 'birthday'];
+        $searchableColumns=['first_name'];
+        $pageData['dataPelanggan'] = Pelanggan::filter( $request,$filterableColumns,$searchableColumns )
+        -> paginate(10)
+        ->onEachSide(2)
+        ->withQueryString();
         return view('admin.pelanggan.index', $pageData);
     }
 
@@ -33,7 +38,7 @@ class PelangganController extends Controller
             'first_name' => ['required'],
             'last_name'  => ['required'],
             'birthday'   => ['required', 'date'],
-            'gender'     => ['required', 'in:Male,Female,Asoy Indomaret,Lontong Bedeng'],
+            'gender'     => ['required', 'in:Female,Male,Other'],
             'email'      => ['required', 'email'],
             'phone'      => ['required', 'numeric'],
         ]);

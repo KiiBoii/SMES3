@@ -7,7 +7,23 @@
     <title>Warung nenek</title>
     <link rel="stylesheet" href="{{ asset('assets/css/homepage.css') }}">
 </head>
+<style>
+    .product {
+    position: relative;
+    cursor: pointer;
+}
 
+.product form {
+    display: inline-block;
+}
+
+.product .add-to-cart {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+</style>
 <body>
     <header>
         <div class="container">
@@ -63,14 +79,27 @@
         <div class="container">
             <div class="product-grid">
                 <!-- Sample products -->
-                <div class="product">
+                <div class="product" onclick="document.getElementById('detail-form-1').submit();">
+                    <!-- Form tersembunyi untuk detail produk -->
+                    <form id="detail-form-1" action="/detailproduk" method="GET" style="display: none;">
+                        <input type="hidden" name="product_id" value="1">
+                    </form>
+
+                    <!-- Konten produk -->
                     <img src="{{ asset('assets/images/ademsari.jpg') }}" alt="Product 1">
                     <h3>Adem sari</h3>
                     <div class="product-rating">★★★★★</div>
                     <div class="product-sold"> --sold</div>
                     <div class="product-price">Rp.3000</div>
-                    <button class="add-to-cart">Add to Cart</button>
+
+                    <!-- Form untuk tombol Add to Cart -->
+                    <form action="/cart" method="GET">
+                        @csrf
+                        <input type="hidden" name="product_id" value="1">
+                        <button class="add-to-cart" type="submit">Add to Cart</button>
+                    </form>
                 </div>
+
                 <div class="product">
                     <img src="{{ asset('assets/images/cokolatos.jpg') }}" alt="Product 2">
                     <h3>chocolatos</h3>
@@ -161,6 +190,18 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+    addToCartButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            event.stopPropagation(); // Mencegah event dari container .product
+        });
+    });
+});
+
+    </script>
 
 </body>
 

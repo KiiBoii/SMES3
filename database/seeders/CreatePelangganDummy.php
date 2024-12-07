@@ -21,7 +21,7 @@ class CreatePelangganDummy extends Seeder
                     'first_name' => $faker->firstName,
                     'last_name' => $faker->lastName,
                     'birthday' => $faker->date(),
-                    'gender' => $faker->randomElement(['Male', 'Female']),
+                    'gender' => $faker->randomElement(['Female', 'Male','Other']),
                     'email' => $faker->unique()->safeEmail,
                     'phone' => $faker->phoneNumber,
                     'created_at' => now(),

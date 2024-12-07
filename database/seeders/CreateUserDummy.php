@@ -22,7 +22,6 @@ class CreateUserDummy extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'password' => bcrypt('password'),
                 'role' => $faker->randomElement(['Admin', 'Pelanggan', 'Mitra']),
-                'remember_token' => \Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
