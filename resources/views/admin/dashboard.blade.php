@@ -1,279 +1,183 @@
 @extends('admin.layouts.admin.app')
 @section('content')
-    <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
-        <a class="navbar-brand me-lg-5" href="../../index.html">
-            <img class="navbar-brand-dark" src="{{ asset('assets-admin/img/brand/light.svg') }}" alt="Volt logo" />
-            <img class="navbar-brand-light" src="{{ asset('assets-admin/img/brand/dark.svg') }}" alt="Volt logo" />
-        </a>
-        <div class="d-flex align-items-center">
-            <button class="navbar-toggler d-lg-none collapsed" type="button"
-                data-bs-toggle="coll
-                <div class="media d-flex align-items-center">
-                <img class="avatar rounded-circle" alt="Image placeholder"
-                    src="{{ asset('assets/images/WhatsApp Image 2024-12-04 at 7.45.46 PM.jpeg') }}">
-                <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span class="mb-0 font-small fw-bold text-gray-900">{{ Auth::check() ? Auth::user()->name : '' }}</span>
-                </div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="#">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                </ol>
+            </nav>
+            <h2 class="h4">Dashboard</h2>
+            <p class="mb-0">Selamat Datang Di Dashboard Admin</p>
         </div>
-        </a>
-        <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                My Profile
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                Settings
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                Messages
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                Support
-            </a>
-            <div role="separator" class="dropdown-divider my-1"></div>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <svg class="dropdown-icon text-danger me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                    </path>
-                </svg>
-                Logout
-            </a>
-        </div>
-        </li>
-        </ul>
-        </div>
-        </div>
-    </nav>
+    </div>
 
-    <div class="py-4">
-        <div class="dropdown">
-            <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+    {{-- Ringkasan Statistik --}}
+
+    <div class="card shadow border-0 text-center p-0">
+        <div class="profile-cover rounded-top"
+            style="background: url('{{ asset('storage/' . (Auth::user()->profile_cover ?? 'default-cover.jpg')) }}');
+            background-size: cover;
+            background-position: center;">
+        </div>
+        <div class="card-body pb-5">
+            <img src="" alt="">
+            <!-- Display user profile picture -->
+            <img src="{{ asset('storage/' . (Auth::user()->gambar ?? 'default-avatar.jpg')) }}"
+                class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="{{ Auth::user()->name }}">
+            <h4 class="h3">{{ Auth::user()->name }}</h4>
+            <h5 class="fw-normal">{{ Auth::user()->role }}</h5>
+            <p class="text-gray mb-4">{{ Auth::user()->location ?? 'Location not set' }}</p>
+            <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center me-2" href="#">
+                <svg class="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
                     </path>
                 </svg>
-                New Task
-            </button>
-            <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-                        </path>
-                    </svg>
-                    Add User
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z">
-                        </path>
-                    </svg>
-                    Add Widget
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z">
-                        </path>
-                        <path d="M9 13h2v5a1 1 0 11-2 0v-5z"></path>
-                    </svg>
-                    Upload Files
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    Preview Security
-                </a>
-                <div role="separator" class="dropdown-divider my-1"></div>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <svg class="dropdown-icon text-danger me-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    Upgrade to Pro
-                </a>
+                Connect
+            </a>
+            <a class="btn btn-sm btn-secondary" href="#">Send Message</a>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Top 3 Pelanggan Baru</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        @foreach ($topPelangganBaru as $pelanggan)
+                            <li class="list-group-item">
+                                <strong>{{ $pelanggan->first_name }} {{ $pelanggan->last_name }}</strong><br>
+                                <small class="text-muted">Mendaftar pada
+                                    {{ $pelanggan->created_at->format('d M Y') }}</small>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('pelanggan.list') }}" class="btn btn-primary">Lihat Semua Pelanggan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">ProdukBaru</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        @foreach ($topProdukBaru as $produk)
+                            <li class="list-group-item">
+                                <strong class="text-dark" style="font-size: 1.1em;">{{ $produk->nama_produk }}</strong>
+                                <span style="color: #3ea3e2; font-weight: normal;">{{ $produk->class }}</span><br>
+                                <small class="text-muted">
+                                    Mendaftar pada {{ $produk->created_at->format('d M Y') }}
+                                </small>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('produk.list') }}" class="btn btn-primary">Lihat Semua Member</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+
+
+    {{-- Navigasi Data --}}
+    {{-- <div class="card border-0 shadow">
+        <div class="card-header d-flex justify-content-between">
+            <h5>Manajemen Data</h5>
+            <div>
+                <a href="{{ route('pelanggan.list') }}" class="btn btn-sm btn-primary">Pelanggan</a>
+                <a href="{{ route('mitra.list') }}" class="btn btn-sm btn-success">Mitra</a>
+                <a href="{{ route('user.list') }}" class="btn btn-sm btn-info">User</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Pilih kategori data untuk melihat detail atau mengelola informasi terkait.</p>
+        </div>
+    </div> --}}
+
+
     <div class="row">
         <div class="col-12 col-xl-8">
             <div class="row">
-                <div class="col-12 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h2 class="fs-5 fw-bold mb-0">Page visits</h2>
-                                </div>
-                                <div class="col text-end">
-                                    <a href="#" class="btn btn-sm btn-primary">See all</a>
-                                </div>
+                <div class="row d-flex flex-row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Pelanggan</h5>
+                                <h2>{{ $totalPelanggan }}<p class="text-success">Pelanggan</p>
+                                </h2>
+                                <a href="{{ route('pelanggan.list') }}" class="btn btn-primary mt-3">Selengkapnya</a>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="border-bottom" scope="col">Page name</th>
-                                        <th class="border-bottom" scope="col">Page Views</th>
-                                        <th class="border-bottom" scope="col">Page Value</th>
-                                        <th class="border-bottom" scope="col">Bounce rate</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th class="text-gray-900" scope="row">
-                                            /demo/admin/index.html
-                                        </th>
-                                        <td class="fw-bolder text-gray-500">
-                                            3,225
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            $20
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            <div class="d-flex">
-                                                <svg class="icon icon-xs text-danger me-2" fill="currentColor"
-                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                42,55%
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-gray-900" scope="row">
-                                            /demo/admin/forms.html
-                                        </th>
-                                        <td class="fw-bolder text-gray-500">
-                                            2,987
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            0
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            <div class="d-flex">
-                                                <svg class="icon icon-xs text-success me-2" fill="currentColor"
-                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                43,24%
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-gray-900" scope="row">
-                                            /demo/admin/util.html
-                                        </th>
-                                        <td class="fw-bolder text-gray-500">
-                                            2,844
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            294
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            <div class="d-flex">
-                                                <svg class="icon icon-xs text-success me-2" fill="currentColor"
-                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                32,35%
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-gray-900" scope="row">
-                                            /demo/admin/validation.html
-                                        </th>
-                                        <td class="fw-bolder text-gray-500">
-                                            2,050
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            $147
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            <div class="d-flex">
-                                                <svg class="icon icon-xs text-danger me-2" fill="currentColor"
-                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                50,87%
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-gray-900" scope="row">
-                                            /demo/admin/modals.html
-                                        </th>
-                                        <td class="fw-bolder text-gray-500">
-                                            1,483
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            $19
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            <div class="d-flex">
-                                                <svg class="icon icon-xs text-success me-2" fill="currentColor"
-                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                26,12%
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Mitra</h5>
+                                <h2>{{ $totalMitra }}<p class="text-warning">Mitra</p>
+                                </h2>
+                                <a href="{{ route('mitra.index') }}" class="btn btn-primary mt-3">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Total User</h5>
+                                <h2>{{ $totalUser }}<p class="text-danger">User</p>
+                                </h2>
+                                <a href="{{ route('User.list') }}" class="btn btn-primary mt-3">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Member</h5>
+                                <h2>{{ $totalProduk }}<p class="text-danger">Member</p>
+                                </h2>
+                                <a href="{{ route('produk.list') }}" class="btn btn-primary mt-3">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-0 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Income</h5>
+                                <h2>{{ $totalProduk }}<p class="text-danger">Income</p>
+                                </h2>
+                                <a href="{{ route('produk.list') }}" class="btn btn-primary mt-3">Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-12 col-xxl-6 mb-4">
                     <div class="card border-0 shadow">
                         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
@@ -282,136 +186,52 @@
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush list my--3">
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <!-- Avatar -->
-                                            <a href="#" class="avatar">
-                                                <img class="rounded" alt="Image placeholder"
-                                                    src="{{ asset('assets/images/WhatsApp Image 2024-08-03 at 9.19.28 AM.jpeg') }}">
-                                            </a>
-                                        </div>
-                                        <div class="col-auto ms--2">
-                                            <h4 class="h6 mb-0">
-                                                <a href="#">FANUM</a>
-                                            </h4>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-success dot rounded-circle me-1"></div>
-                                                <small>Online</small>
+                                @foreach ($topUserBaru as $user)
+                                    <li class="list-group-item px-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <a href="#" class="avatar">
+                                                    <!-- Check if user has a profile image -->
+                                                    @if ($user->gambar)
+                                                        <img class="rounded" alt="Image placeholder"
+                                                            src="{{ asset('storage/' . $user->gambar) }}" width="50">
+                                                    @else
+                                                        <!-- Use a default avatar if no image is found -->
+                                                        <img class="rounded" alt="Image placeholder"
+                                                            src="{{ asset('assets/images/default-avatar.jpg') }}"
+                                                            width="50">
+                                                    @endif
+                                                </a>
+                                            </div>
+                                            <div class="col-auto ms--2">
+                                                <h4 class="h6 mb-0">
+                                                    <a href="#">{{ $user->name }}</a>
+                                                </h4>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-success dot rounded-circle me-1"></div>
+                                                    <small>{{ $user->status ?? 'Offline' }}</small>
+                                                </div>
+                                            </div>
+                                            <div class="col text-end">
+                                                <a href="#"
+                                                    class="btn btn-sm btn-secondary d-inline-flex align-items-center">
+                                                    <svg class="icon icon-xxs me-2" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd"
+                                                            d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    Message
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="col text-end">
-                                            <a href="#"
-                                                class="btn btn-sm btn-secondary d-inline-flex align-items-center">
-                                                <svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Invite
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <!-- Avatar -->
-                                            <a href="#" class="avatar">
-                                                <img class="rounded" alt="Image placeholder"
-                                                    src="{{ asset('assets/images/images.jpg') }}">
-                                            </a>
-                                        </div>
-                                        <div class="col-auto ms--2">
-                                            <h4 class="h6 mb-0">
-                                                <a href="#">DITO</a>
-                                            </h4>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-danger dot rounded-circle me-1"></div>
-                                                <small>OFFLINE</small>
-                                            </div>
-                                        </div>
-                                        <div class="col text-end">
-                                            <a href="#"
-                                                class="btn btn-sm btn-secondary d-inline-flex align-items-center">
-                                                <svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Message
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <!-- Avatar -->
-                                            <a href="#" class="avatar">
-                                                <img class="rounded" alt="Image placeholder"
-                                                    src="{{ asset('assets-admin/img/team/profile-picture-3.jpg') }}">
-                                            </a>
-                                        </div>
-                                        <div class="col-auto ms--2">
-                                            <h4 class="h6 mb-0">
-                                                <a href="#">Bonnie Green</a>
-                                            </h4>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-danger dot rounded-circle me-1"></div>
-                                                <small>Offline</small>
-                                            </div>
-                                        </div>
-                                        <div class="col text-end">
-                                            <a href="#"
-                                                class="btn btn-sm btn-secondary d-inline-flex align-items-center">
-                                                <svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Message
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <!-- Avatar -->
-                                            <a href="#" class="avatar">
-                                                <img class="rounded" alt="Image placeholder"
-                                                    src="{{ asset('assets-admin/img/team/profile-picture-1.jpg') }}">
-                                            </a>
-                                        </div>
-                                        <div class="col-auto ms--2">
-                                            <h4 class="h6 mb-0">
-                                                <a href="#">Neil Sims</a>
-                                            </h4>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-danger dot rounded-circle me-1"></div>
-                                                <small>Offline</small>
-                                            </div>
-                                        </div>
-                                        <div class="col text-end">
-                                            <a href="#"
-                                                class="btn btn-sm btn-secondary d-inline-flex align-items-center">
-                                                <svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Message
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
+
+
                     </div>
                 </div>
                 <div class="col-12 col-xxl-6 mb-4">
@@ -524,28 +344,7 @@
         </div>
         <div class="col-12 col-xl-4">
             <div class="col-12 px-0 mb-4">
-                <div class="card shadow border-0 text-center p-0">
-                    <div class="profile-cover rounded-top"
-                        data-background="{{ asset('assets-admin/img/profile-cover.jpg') }}"
-                        style="background: url(&quot;&quot;);"></div>
-                    <div class="card-body pb-5">
-                        <img src="{{ asset('assets/images/WhatsApp Image 2024-12-04 at 7.45.46 PM.jpeg') }}"
-                            class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
-                        <h4 class="h3">ADMIN 1</h4>
-                        <h5 class="fw-normal">ADMIN PERTAMA</h5>
-                        <p class="text-gray mb-4">New York, USA</p>
-                        <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center me-2" href="#">
-                            <svg class="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-                                </path>
-                            </svg>
-                            Connect
-                        </a>
-                        <a class="btn btn-sm btn-secondary" href="#">Send Message</a>
-                    </div>
-                </div>
+
             </div>
             <div class="col-12 px-0 mb-4">
                 <div class="card border-0 shadow">

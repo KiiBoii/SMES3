@@ -2,22 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Pelanggan;
+use App\Models\Mitra;
+use App\Models\User;
+use App\Models\produk;
 
 class DashboardController extends Controller
 {
-/*************  ✨ Codeium Command ⭐  *************/
     /**
      * Dashboard index.
      *
      * Redirects to login form if user is not authenticated.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-/******  575f8b9b-1f44-44ce-9638-38b3d7f67f68  *******/
     public function index()
     {
-        return view('admin.dashboard');
-    }
+        // Fetch the necessary data
+        $dataPelanggan = Pelanggan::all();  // Retrieve all Pelanggan (customers) or adjust the query as needed
+        $totalPelanggan = Pelanggan::count();
+        $totalMitra = Mitra::count();
+        $totalUser = User::count();
+        $totalProduk = produk::count();
 
+        // Fetch other data like top new members, users, etc.
+        $topPelangganBaru = Pelanggan::latest()->take(3)->get();
+        $topProdukBaru = produk::latest()->take(3)->get();
+        $topUserBaru = User::latest()->take(3)->get();
+
+        // Return the view with the data
+        return view('admin.dashboard', compact(
+            'dataPelanggan', 'totalPelanggan', 'totalMitra', 'totalUser', 'totalProduk',
+            'topPelangganBaru', 'topProdukBaru', 'topUserBaru'
+        ));
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -70,6 +71,30 @@ class AuthController extends Controller
 
         return view('lupa-password', $request);
     }
+    public function redirectToGoogle()
+{
+    return Socialite::driver('google')->redirect();
+}
+
+
+public function handleGoogleCallback()
+{
+    $googleUser = Socialite::driver('google')->stateless()->user();
+    $email_user = $googleUser->email;
+    $user = User::where('email', $email_user)->first();
+    if ($user) {
+        Auth::login($user);
+        return redirect()->route('dashboard');
+    } else {
+        Session::flush();
+
+        $result = 'error';
+    }
+
+    return redirect()->route('login-form')->with('result', $result);
+
+    /** Kode untuk autentikasi dan redirect */
+}
     public function do_forgot_password(Request $request)
     {
         $request->validate([

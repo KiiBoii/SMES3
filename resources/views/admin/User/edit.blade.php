@@ -43,38 +43,49 @@
     </div>
     {{-- FORM --}}
     <div class="card card-body border-0 shadow mb-4">
-        <form action="{{ route('User.update') }}" method="POST">
-            @csrf <form>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div><label for="name">First Name</label> <input class="form-control" id="name"
-                                name="name" type="text" placeholder="Masukkan nama user" required=""
-                                value="{{ $dataUser->name }}"></div>
-                        <div class="form-group"><label for="email">Email</label> <input class="form-control"
-                                id="email" name="email" type="email" placeholder="name@company.com" required=""
-                                value="{{ $dataUser->email }}"></div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div><label for="Password">Password</label> <input class="form-control" id="Password"
-                                name="Password" type="password" placeholder="Masukkan Password anda" required=""
-                                value="{{ $dataUser->Password }}"></div>
-                        <div> <label for="role">Role User</label>
-                            <select class="form-select mb-0" id="role" name="role"
-                                aria-label="Gender select example">
-                                <option selected="selected">Role</option>
-                                <option value="Admin" {{ $dataUser->role == 'Admin' ? 'selected' : '' }}>Admin
-                                </option>
-                                <option value="Pelanggan" {{ $dataUser->role == 'Pelanggan' ? 'selected' : '' }}>
-                                    Pelanggan</option>
-                                <option value="Mitra" {{ $dataUser->role == 'Mitra' ? 'selected' : '' }}>Mitra
-                                </option>
-                            </select>
-                        </div>
+        <form action="{{ route('User.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div><label for="name">First Name</label> <input class="form-control" id="name"
+                            name="name" type="text" placeholder="Masukkan nama user" required=""
+                            value="{{ $dataUser->name }}"></div>
+                    <div class="form-group"><label for="email">Email</label> <input class="form-control"
+                            id="email" name="email" type="email" placeholder="name@company.com" required=""
+                            value="{{ $dataUser->email }}"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div><label for="Password">Password</label> <input class="form-control" id="Password"
+                            name="password" type="password" placeholder="Masukkan Password anda" required=""
+                            value="{{ old('password') }}"></div>
+                    <div> <label for="role">Role User</label>
+                        <select class="form-select mb-0" id="role" name="role" aria-label="Gender select example">
+                            <option value="Admin" {{ $dataUser->role == 'Admin' ? 'selected' : '' }}>Admin
+                            </option>
+                            <option value="Pelanggan" {{ $dataUser->role == 'Pelanggan' ? 'selected' : '' }}>
+                                Pelanggan</option>
+                            <option value="Mitra" {{ $dataUser->role == 'Mitra' ? 'selected' : '' }}>Mitra
+                            </option>
+                        </select>
                     </div>
                 </div>
-    </div><button class="btn btn-info mt-2 animate-up-2" type="submit">Simpan Perubahan</button></div>
-    <input type="hidden" name="id" value="{{ $dataUser->id }}" />
-    </form>
+                <div class="col-md-6 mb-3">
+                    <label for="gambar">Gambar Produk</label>
+                    <input class="form-control" id="gambar" name="gambar" type="file" accept="image/*" required=""
+                        value="{{ $dataUser->gambar }}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="profile_cover">Profile Cover</label>
+                    <input class="form-control" id="profile_cover" name="profile_cover" type="file" accept="image/*" required=""
+                    value="{{ $dataUser->profile_cover }}" >
+                </div>
+            </div>
+
+            <!-- Gambar Input -->
+
+            <button class="btn btn-info mt-2 animate-up-2" type="submit">Simpan Perubahan</button>
+            <input type="hidden" name="id" value="{{ $dataUser->id }}" />
+        </form>
     </div>
 
 @endsection

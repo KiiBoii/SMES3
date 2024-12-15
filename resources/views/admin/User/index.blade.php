@@ -97,6 +97,8 @@
                         <th class="border-0">EMAIL</th>
                         <th class="border-0">PASSWORD</th>
                         <th class="border-0">ROLE</th>
+                        <th class="border-0">GAMBAR</th>
+                        <th class="border-0">PROFILE COVER</th>
                         <th class="border-0 rounded-end">ACTION</th>
                     </thead>
                     <tbody>
@@ -110,6 +112,20 @@
                                 <td>{{ $row->email }}</td>
                                 <td>{{ $row->password }}</td>
                                 <td>{{ $row->role }}</td>
+                                <td>
+                                    @if ($row->gambar)
+                                        <img src="{{ asset('storage/' . $row->gambar) }}" alt="Gambar Produk" width="50">
+                                    @else
+                                        <span class="text-muted">Tidak ada gambar</span>
+                                    @endif
+                                    <td>
+                                        @if ($row->profile_cover)
+                                        <img src="{{ asset('storage/' . $row->profile_cover) }}" alt="Profile Cover" width="50">
+                                        @else
+                                            <span class="text-muted">Tidak ada gambar</span>
+                                        @endif
+                                    </td>
+
 
                                 <td>
                                     <a href="{{ route('User.edit', $row->id) }}" class="btn btn-info btn-sm">

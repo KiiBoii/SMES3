@@ -138,3 +138,6 @@ Route::post('/cart/remove', [CartController::class, 'destroy'])->name('cart.dest
 
 
 Route::get('/detailproduk', [DetailProdukController::class, 'index'])->name('detailproduk.index');
+
+Route::get('/auth/redirect-google', [AuthController::class, 'redirectToGoogle'])->name('redirect.google');
+Route::get('/oauthcallback', [AuthController::class, 'handleGoogleCallback']);

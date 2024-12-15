@@ -4,150 +4,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #f05340, #f8cdda);
+            background: linear-gradient(to bottom, #136dc8, #f0f5fa);
             height: 100vh;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            /* Prevents scrolling */
         }
 
-        .login-card {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            background-color: #ffffff;
+        .login-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Vertically centers the content */
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            /* Adjust the height to prevent overflow */
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
         }
 
-        .card-header {
-            background-color: #f05340;
-            color: white;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+        .login-image {
+            display: block;
+            width: 50%;
+            height: 100%;
+            background-image: url('{{ asset('assets/images/Hoshina Subaru _ Subaru Hoshina.jpg') }}');
+            background-position: center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .login-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            /* Semi-transparent overlay */
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            /* Reduced the max-width of the form */
+            padding: 1rem;
+            /* Reduced padding for a more compact form */
+            overflow-y: hidden;
+            /* Disable internal scrolling */
+            max-height: 70vh;
+            /* Adjusted the height to ensure better fit */
+        }
+
+        .login-header {
             text-align: center;
+            margin-bottom: 1.5rem;
+            /* Reduced margin to fit content better */
         }
 
-        .card-body {
-            padding: 2rem;
+        .login-header h3 {
+            font-size: 1.75rem;
+            color: #343a40;
+            font-weight: 600;
+        }
+
+        .login-header p {
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .form-group {
+            position: relative;
         }
 
         .form-control {
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid #ced4da;
-            padding-right: 30px;
-            /* Add space for the icon */
+            box-shadow: none;
+            transition: all 0.3s ease;
+            padding-left: 35px;
+        }
+
+        .form-control:focus {
+            border-color: #5e9cfc;
+            box-shadow: 0 0 10px rgba(94, 156, 252, 0.3);
+        }
+
+        .form-control .fas {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ced4da;
         }
 
         .btn-primary {
-            border-radius: 8px;
-            background-color: #f05340;
+            background: linear-gradient(to right, #5e9cfc, #5271ff);
+            border: none;
+            border-radius: 10px;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #d94734;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(82, 113, 255, 0.5);
         }
 
-        .card-footer {
-            background-color: transparent;
+        .social-login {
             text-align: center;
-            padding-bottom: 1rem;
+            margin-top: 1rem;
         }
 
-        .small-text {
+        .social-login .btn-secondary {
+            background: white;
             color: #6c757d;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            padding: 0.8rem;
+            transition: all 0.3s ease;
         }
 
-        a {
-            color: #f05340;
+        .social-login .btn-secondary:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            /* Reduced margin */
+        }
+
+        .login-footer a {
+            color: #5271ff;
             text-decoration: none;
+            font-weight: 500;
         }
 
-        a:hover {
-            color: #d94734;
+        .login-footer a:hover {
+            color: #5e9cfc;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .eye-icon {
             position: absolute;
-            right: 10px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
+            color: #6c757d;
+            transition: color 0.3s ease;
+        }
+
+        .eye-icon:hover {
+            color: #495057;
         }
     </style>
 </head>
 
 <body>
+    <div class="login-container">
+        <div class="login-image"></div>
+        <div class="login-form">
+            <div class="login-header">
+                <h3>Welcome Back!</h3>
+                <p>Login to your e-commerce account</p>
+            </div>
+            @if (session('result') == 'error')
+                <div class="alert alert-danger">
+                    Login failed, email or password incorrect.
+                </div>
+            @endif
+            @if (session('error') == 'error')
+                <div class="alert alert-danger">
+                    Please login first.
+                </div>
+            @endif
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card login-card">
-                    <div class="card-header">
-                        <h3>Welcome Back</h3>
-                        <p>Please login to your account</p>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                        @if (session('result') == 'error')
-                            <div class="alert alert-danger">
-                                Login failed, email atau password incorrect
-                            </div>
-                        @endif
-                        @if (session('error') == 'error')
-                        <div class="alert alert-danger">
-                            Silahkan login terlebih dahulu
-                        </div>
-                    @endif
-
-                    </div>
-                    <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        @if (isset($result))
-                            @if ($result == 'success')
-                                <div class="alert alert-success text-center">login</div>
-                            @elseif($result == 'error')
-                                <div class="alert alert-danger text-center">failed</div>
-                            @endif
-                        @endif
-
-                        <form action="{{ route('login') }}" method="POST">
-                            @csrf
-                            <div class="mb-4">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input class="form-control" id="email" value="{{ old('email') }}"
-                                        name="email" type="email" placeholder="name@company.com" required="">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="password" class="form-label">Password</label>
-                                <div class="position-relative">
-                                    <input type="password" class="form-control" id="password" name="password" required
-                                        placeholder="Enter your password">
-                                    <i class="fas fa-eye eye-icon" id="togglePassword"></i>
-                                </div>
-                            </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-block">Login</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <p class="small-text">Don't have an account? <a href="#">Forgot Password</a></p>
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="position-relative">
+                        <input type="email" id="email" name="email" class="form-control" placeholder=""
+                            required>
                     </div>
                 </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="position-relative">
+                        <input type="password" id="password" name="password" class="form-control" placeholder=""
+                            required>
+                        <i class="fas fa-eye eye-icon" id="togglePassword"></i> <!-- Eye Icon for toggle visibility -->
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+
+            <div class="social-login">
+                <p class="mt-3">Or continue with:</p>
+                <a href="{{ route('redirect.google') }}" class="btn btn-secondary w-100 mt-2">
+                    <i class="fab fa-google"></i> Login with Google
+                </a>
+            </div>
+
+            <div class="login-footer">
+                <p class="mt-4">Forgot your password? <a href="#">Click here</a></p>
             </div>
         </div>
     </div>
@@ -157,16 +256,13 @@
         // Toggle password visibility
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
-        const eyeIcon = togglePassword;
 
         togglePassword.addEventListener('click', function() {
-            // Toggle the password type attribute
             const type = passwordInput.type === 'password' ? 'text' : 'password';
             passwordInput.type = type;
 
-            // Toggle the eye icon
-            eyeIcon.classList.toggle('fa-eye');
-            eyeIcon.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
         });
     </script>
 </body>

@@ -99,12 +99,15 @@
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="media d-flex align-items-center">
-                            <img class="avatar rounded-circle" alt="Image placeholder"
-                                src="{{ asset('assets-admin/img/team/profile-picture-3.jpg') }}">
+                            <!-- Display user profile image -->
+                            <img class="avatar rounded-circle" alt="User Profile Picture"
+                                src="{{ asset('storage/' . (Auth::user()->gambar ?? 'default-avatar.jpg')) }}">
                             <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                                <span class="mb-0 font-small fw-bold text-gray-900">{{Auth::check() ? Auth::user()->name.'('.Auth::user()->role.')': ''}}</span>
+                                <!-- Display user name -->
+                                <span class="mb-0 font-small fw-bold text-gray-900">{{ Auth::check() ? Auth::user()->name.'('.Auth::user()->role.')':'' }}</span>
                             </div>
                         </div>
+                    </div>
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
                         <a class="dropdown-item d-flex align-items-center" href="#">
