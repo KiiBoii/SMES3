@@ -51,22 +51,26 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div><label for="nama_produk">Nama Produk</label>
-                        <input class="form-control" id="nama_produk" name="nama_produk" type="text" placeholder="Masukkan Nama Produk" required="">
+                        <input class="form-control" id="nama_produk" name="nama_produk" type="text"
+                            placeholder="Masukkan Nama Produk" required="">
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div><label for="deskripsi">Deskripsi</label>
-                        <input class="form-control" id="deskripsi" name="deskripsi" type="text" placeholder="Masukkan Deskripsi Produk" required="">
+                        <input class="form-control" id="deskripsi" name="deskripsi" type="text"
+                            placeholder="Masukkan Deskripsi Produk" required="">
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="form-group"><label for="harga">Harga</label>
-                        <input class="form-control" id="harga" name="harga" type="number" placeholder="Masukkan Harga Produk" required="">
+                        <input class="form-control" id="harga" name="harga" type="number"
+                            placeholder="Masukkan Harga Produk" required="">
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="form-group"><label for="stok">Stok</label>
-                        <input class="form-control" id="stok" name="stok" type="number" placeholder="Masukkan Stok Produk (min 0)" required="">
+                        <input class="form-control" id="stok" name="stok" type="number"
+                            placeholder="Masukkan Stok Produk (min 0)" required="">
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -82,16 +86,21 @@
                     <label for="tgl_expired">Tanggal Expired</label>
                     <div class="input-group">
                         <span class="input-group-text">
-                            <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                            <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </span>
-                        <input data-datepicker="" class="form-control datepicker-input" id="tgl_expired" name="tgl_expired" type="date" placeholder="dd/mm/yyyy" required="">
+                        <input data-datepicker="" class="form-control datepicker-input" id="tgl_expired"
+                            name="tgl_expired" type="date" placeholder="dd/mm/yyyy" required="">
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="gambar">Gambar Produk</label>
-                    <input class="form-control" id="gambar" name="gambar" type="file" accept="image/*" required="">
+                    <input class="form-control" id="gambar" name="gambar" type="file" accept="image/*"
+                        required="">
                 </div>
             </div>
             <button class="btn btn-gray-800 mt-2 animate-up-2" type="submit">Save All</button>

@@ -1676,6 +1676,26 @@ progress {
     margin-right: calc(-0.5 * var(--bs-gutter-x));
     margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
+.row1 {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1rem; /* Adjust vertical spacing */
+    display: flex;
+    flex-wrap: nowrap;
+
+    margin-top: var(--bs-gutter-y); /* Positive margin */
+    margin-right: var(--bs-gutter-x);
+    margin-left: var(--bs-gutter-x);
+
+    /* Alternatively, you can add padding */
+    padding: var(--bs-gutter-y) var(--bs-gutter-x);
+}
+.row1 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--bs-gutter-x); /* Horizontal spacing between items */
+    margin: 1rem; /* External margin around the row */
+}
+
 
 .row > * {
     flex-shrink: 0;
@@ -1788,6 +1808,8 @@ progress {
 .col-12 {
     flex: 0 0 auto;
     width: 100%;
+    margin-top: auto;
+
 }
 
 .offset-1 {

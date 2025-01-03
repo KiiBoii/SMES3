@@ -9,6 +9,7 @@ use App\Http\Controllers\testcontroller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\DetailProdukController;
@@ -68,41 +69,41 @@ Route::get('/home/{param1}', [HomeController::class, 'redirectTo']);
 
 // routes/web.php
 
+Route::get('/home', [WelcomeController::class, 'index']) -> name('welcome');
 Route::get('/login', [AuthController::class, 'index'])->name('login-form');
 Route::post('/login/data', [AuthController::class, 'login'])->name('login');
-
+Route::get('/homepage', [ProdukController::class, 'showProducts'])->name('homepage');
+Route::get('/products', [ProdukController::class, 'showProducts'])->name('produk.show');
+Route::get('/product/{nama_produk}', [DetailProdukController::class, 'index'])->name('DetailProduk');
+Route::get('/products', [ProdukController::class, 'showProducts'])->name('showProducts');// In routes/web.php
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // View cart
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store'); // Update cart item quantity
+Route::post('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy'); // Remove cart item
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::group(['middleware' => ['checkislogin']], function () {
 
-        Route::get('/homepage', function () {
-            return view('homepage'); // Buat view untuk homepage
-        })->name('homepage');
+    Route::get('mitra', [MitraController::class, 'index'])->name('mitra.index');
+    Route::get('mitra/create', [MitraController::class, 'create'])->name('mitra.create');
+    Route::post('mitra/store', [MitraController::class, 'store'])->name('mitra.store');
 
+    // Use the correct parameter name in the edit route
+    Route::get('mitra/edit/{param1}', [MitraController::class, 'edit'])->name('mitra.edit');
 
+    // For the update method, you might want to use a PUT or PATCH request instead of POST
+    Route::post('mitra/update', [MitraController::class, 'update'])->name('mitra.update');
 
+    // Use the correct parameter name in the destroy route
+    Route::get('mitra/destroy/{param1}', [MitraController::class, 'destroy'])->name('mitra.destroy');
 
-        Route::get('mitra', [MitraController::class, 'index'])->name('mitra.index');
-        Route::get('mitra/create', [MitraController::class, 'create'])->name('mitra.create');
-        Route::post('mitra/store', [MitraController::class, 'store'])->name('mitra.store');
+    Route::get('user', [UserController::class, 'index'])->name('User.list');
+    Route::get('user/create', [UserController::class, 'create'])->name('User.create');
+    Route::post('user/store', [UserController::class, 'store'])->name('User.store');
 
-        // Use the correct parameter name in the edit route
-        Route::get('mitra/edit/{param1}', [MitraController::class, 'edit'])->name('mitra.edit');
+    Route::get('user/edit/{param1}', [UserController::class, 'edit'])->name('User.edit');
 
-        // For the update method, you might want to use a PUT or PATCH request instead of POST
-        Route::post('mitra/update', [MitraController::class, 'update'])->name('mitra.update');
+    Route::post('user/update', [UserController::class, 'update'])->name('User.update');
 
-        // Use the correct parameter name in the destroy route
-        Route::get('mitra/destroy/{param1}', [MitraController::class, 'destroy'])->name('mitra.destroy');
-
-        Route::get('user', [UserController::class, 'index'])->name('User.list');
-        Route::get('user/create', [UserController::class, 'create'])->name('User.create');
-        Route::post('user/store', [UserController::class, 'store'])->name('User.store');
-
-        Route::get('user/edit/{param1}', [UserController::class, 'edit'])->name('User.edit');
-
-        Route::post('user/update', [UserController::class, 'update'])->name('User.update');
-
-        Route::get('user/destroy/{param1}', [UserController::class, 'destroy'])->name('User.destroy');
-
+    Route::get('user/destroy/{param1}', [UserController::class, 'destroy'])->name('User.destroy');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -127,15 +128,11 @@ Route::group(['middleware' => ['checkislogin']], function () {
 
     Route::post('produk/update', [ProdukController::class, 'update'])->name('produk.update');
 
-    Route::get('produk/destroy/{param1}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+    Route::delete('produk/destroy/{param1}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
-Route::post('/cart/remove', [CartController::class, 'destroy'])->name('cart.destroy');
-
 
 Route::get('/detailproduk', [DetailProdukController::class, 'index'])->name('detailproduk.index');
 

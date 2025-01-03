@@ -52,4 +52,8 @@ class Produk extends Model
 
         return $query;
     }
+    public function produk()
+{
+    return $this->belongsTo(produk::class, 'product_id', 'produk_id');
+}
 }

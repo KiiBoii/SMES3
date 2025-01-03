@@ -49,11 +49,9 @@
         </div>
         <ul class="nav flex-column pt-3 pt-md-0">
             <li class="nav-item">
-                <a href="../../index.html" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
                     </span>
-                    <span class="mt-1 ms-1 sidebar-text">Warung Nenek</span>
-                </a>
+                    <img src="{{ asset('assets/images/warung nenek.png') }}" class="" alt="">
             </li>
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">

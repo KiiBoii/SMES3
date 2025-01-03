@@ -80,6 +80,7 @@ class UserController extends Controller
         $pageData['dataUser'] = User::findOrFail($param1);
         return view('admin.User.edit', $pageData);
     }
+    
 
     /**
      * Update the specified resource in storage.

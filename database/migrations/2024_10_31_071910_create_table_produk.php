@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('deskripsi');
             $table->integer('harga')->nullable();
             $table->integer('stok')->nullable();
-            $table->enum('jenis', ['Makanan', 'Minuman', 'Kerajinan'])->nullable();
+            $table->enum('jenis', ['Makanan', 'Minuman', 'Obat Dll'])->nullable();
             $table->date('tgl_expired')->nullable();
             $table->string('gambar')->nullable(); // Tambahkan kolom gambar di sini
             $table->timestamps();

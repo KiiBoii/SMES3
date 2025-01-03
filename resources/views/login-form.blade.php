@@ -27,7 +27,7 @@
             /* Vertically centers the content */
             width: 100%;
             max-width: 900px;
-            height: 80vh;
+            height: 85vh;
             /* Adjust the height to prevent overflow */
             background: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
@@ -40,7 +40,7 @@
             display: block;
             width: 50%;
             height: 100%;
-            background-image: url('{{ asset('assets/images/Hoshina Subaru _ Subaru Hoshina.jpg') }}');
+            background-image: url('{{ asset('assets/images/download (3).jpg') }}');
             background-position: center center;
             background-size: cover;
             position: relative;
@@ -65,7 +65,7 @@
             /* Reduced padding for a more compact form */
             overflow-y: hidden;
             /* Disable internal scrolling */
-            max-height: 70vh;
+            max-height: 75vh;
             /* Adjusted the height to ensure better fit */
         }
 
@@ -128,7 +128,7 @@
 
         .social-login {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 2rem;
         }
 
         .social-login .btn-secondary {
@@ -186,6 +186,71 @@
         .eye-icon:hover {
             color: #495057;
         }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            /* Start fully transparent */
+            animation: fadeMove 5s ease-in-out forwards;
+        }
+
+        @keyframes fadeMove {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.8);
+            }
+
+            25% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+                /* Slight upward movement */
+            }
+
+            75% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+                /* Maintain position and size */
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.5);
+                /* Fade out and shrink */
+            }
+        }
+
+        .particle i {
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(10px) rotate(15deg);
+            }
+        }
+        .alert {
+    margin-bottom: 1rem; /* Add spacing below alerts */
+}
     </style>
 </head>
 
@@ -245,11 +310,10 @@
                 </a>
             </div>
 
-            <div class="login-footer">
-                <p class="mt-4">Forgot your password? <a href="#">Click here</a></p>
-            </div>
+
         </div>
     </div>
+    <div class="particles-container" id="particlesContainer"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -264,6 +328,28 @@
             this.classList.toggle('fa-eye');
             this.classList.toggle('fa-eye-slash');
         });
+        const particlesContainer = document.getElementById('particlesContainer');
+        const icons = ['fa-shopping-cart', 'fa-box', 'fa-dollar-sign', 'fa-tags'];
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            const icon = document.createElement('i');
+            icon.className = `fas ${icons[Math.floor(Math.random() * icons.length)]}`;
+            particle.appendChild(icon);
+
+            particlesContainer.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 5000); // Match the animation duration
+        }
+
+        // Generate particles at regular intervals
+        setInterval(createParticle, 500);
     </script>
 </body>
 

@@ -36,4 +36,5 @@ class DashboardController extends Controller
             'topPelangganBaru', 'topProdukBaru', 'topUserBaru'
         ));
     }
+
 }

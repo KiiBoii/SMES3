@@ -2,37 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-
+use App\Models\Produk;
 
 class DetailProdukController extends Controller
 {
     /**
-     * Halaman login.
+     * Display the details of a single product.
      *
-     * Jika user sudah login, maka akan dialihkan ke halaman dashboard.
-     * Jika belum, maka akan ditampilkan form login.
-     *
+     * @param  string  $nama_produk
      * @return \Illuminate\Http\Response
      */
-
-    public function index()
+    public function index($nama_produk)
     {
-        return view('DetailProduk');
+        // Fetch the product by its name (nama_produk)
+        $product = Produk::where('nama_produk', $nama_produk)->firstOrFail();
 
+        // Fetch all other products excluding the current product
+        $relatedProducts = Produk::where('nama_produk', '!=', $nama_produk)->get();
+
+        // Return the view with product data
+        return view('USER.DetailProduk', compact('product', 'relatedProducts'));
     }
-
-    public function store()
-    {
-
-    }
-
-    public function destroy()
-    {
-
-    }
-    }
+}
